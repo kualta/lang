@@ -68,6 +68,10 @@ func (l *Lexer) readToken() string {
 
 	tokenIdent := l.input[startPosition:l.position]
 
+	if token.IsDigit(tokenIdent[len(tokenIdent)-1]) {
+		tokenIdent = token.TrimDigit(tokenIdent)
+	}
+
 	return tokenIdent
 }
 

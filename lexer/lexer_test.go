@@ -44,6 +44,7 @@ func TestNextToken2(t *testing.T) {
 	input := `let five = 5;
 let ten = 10;
 let ten_point_five = 10.5;
+let ten_thousand = 10_000;
 
 let add = fn(x, y) {
   x + y;
@@ -70,6 +71,11 @@ let result = add(five, ten);
 		{token.IDENT, "ten_point_five"},
 		{token.ASSIGN, "="},
 		{token.FLOAT, "10.5"},
+		{token.SEMICOLON, ";"},
+		{token.LET, "let"},
+		{token.IDENT, "ten_thousand"},
+		{token.ASSIGN, "="},
+		{token.INT, "10000"},
 		{token.SEMICOLON, ";"},
 		{token.LET, "let"},
 		{token.IDENT, "add"},

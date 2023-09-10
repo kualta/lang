@@ -44,6 +44,10 @@ func IsDigit(ch byte) bool {
 	return '0' <= ch && ch <= '9' || ch == '_' || ch == '.'
 }
 
+func TrimDigit(ident string) string {
+	return strings.ReplaceAll(ident, "_", "")
+}
+
 func IsIdentifier(ch byte) bool {
 	return IsLetter(ch) || IsDigit(ch)
 }
