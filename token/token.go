@@ -1,5 +1,7 @@
 package token
 
+import "strings"
+
 type TokenType string
 
 type Token struct {
@@ -17,6 +19,33 @@ func LookupIdent(ident string) TokenType {
 		return token
 	}
 	return IDENT
+}
+
+func GetTokenType(tokenIdent string) TokenType {
+	var tokenType TokenType = ILLEGAL
+
+	if strings.ContainsRune(tokenIdent, '.') {
+		tokenType = FLOAT
+	} else if IsDigit(tokenIdent[len(tokenIdent)-1]) {
+		tokenType = INT
+	} else if IsLetter(tokenIdent[len(tokenIdent)-1]) {
+		tokenType = LookupIdent(tokenIdent)
+	}
+
+	return tokenType
+}
+
+func IsLetter(ch byte) bool {
+	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_'
+}
+
+func IsDigit(ch byte) bool {
+	//                               \/ allow for 1_000_000
+	return '0' <= ch && ch <= '9' || ch == '_' || ch == '.'
+}
+
+func IsIdentifier(ch byte) bool {
+	return IsLetter(ch) || IsDigit(ch)
 }
 
 const (
